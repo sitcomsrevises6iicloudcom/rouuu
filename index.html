@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette Tracker</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #121212;
+            color: #fff;
+            text-align: center;
+        }
+        h1 {
+            color: #00ff99;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444;
+        }
+        th {
+            background: #333;
+        }
+        tr:nth-child(even) {
+            background: #1e1e1e;
+        }
+        .hot {
+            color: #ff3333;
+            font-weight: bold;
+        }
+        .cold {
+            color: #3399ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Roulette Tracker</h1>
+    <p>Track hot and cold numbers over time</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Hits</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="tracker-body">
+            <tr><td>1</td><td>0</td><td class="cold">Cold</td></tr>
+            <tr><td>7</td><td>0</td><td class="cold">Cold</td></tr>
+            <tr><td>13</td><td>0</td><td class="cold">Cold</td></tr>
+        </tbody>
+    </table>
+    
+    <script>
+        // Example hot/cold simulation
+        const rows = document.querySelectorAll('#tracker-body tr');
+        setInterval(() => {
+            rows.forEach(row => {
+                let hitsCell = row.children[1];
+                let hits = parseInt(hitsCell.innerText);
+                if (Math.random() > 0.8) {
+                    hits++;
+                    hitsCell.innerText = hits;
+                    if (hits > 3) {
+                        row.children[2].innerText = 'Hot';
+                        row.children[2].className = 'hot';
+                    }
+                }
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
